@@ -10,6 +10,8 @@ import com.yannart.validation.converter.JSR303ConstraintConverter;
 
 /**
  * Converter from the annotation <code>Min</code> to the attribute "min".
+ * 
+ * @author Yann Nicolas
  */
 public class MinConverter implements JSR303ConstraintConverter {
 

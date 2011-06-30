@@ -11,6 +11,8 @@ import com.yannart.validation.converter.JSR303ConstraintConverter;
 /**
  * Converter from the annotation <code>NotNull</code> to the attribute
  * "required".
+ * 
+ * @author Yann Nicolas
  */
 public class RequiredConverter implements JSR303ConstraintConverter {
 

@@ -4,7 +4,12 @@ import java.util.Set;
 
 import javax.validation.Validator;
 
-
+/**
+ * Generates constrained properties from a Bean class annotated with JRE303
+ * annotations.
+ * 
+ * @author Yann Nicolas
+ */
 public interface JSR303ToConstrainedProperties {
 
 	/**

@@ -2,6 +2,12 @@ package com.yannart.validation.converter;
 
 import java.util.Set;
 
+/**
+ * Interface of factories capable of getting the appropriate converters to
+ * convert properties with annotations.
+ * 
+ * @author Yann Nicolas
+ */
 public interface ConstraintConverterFactory {
 
 	/**

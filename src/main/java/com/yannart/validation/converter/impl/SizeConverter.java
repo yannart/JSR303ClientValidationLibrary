@@ -11,6 +11,8 @@ import com.yannart.validation.converter.JSR303ConstraintConverter;
 /**
  * Converter from the annotation <code>Size</code> to the attributes "minlength"
  * and "maxlength".
+ * 
+ * @author Yann Nicolas
  */
 public class SizeConverter implements JSR303ConstraintConverter {
 

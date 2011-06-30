@@ -10,6 +10,8 @@ import com.yannart.validation.converter.JSR303ConstraintConverter;
 
 /**
  * Converter from the annotation <code>Max</code> to the attribute "max".
+ * 
+ * @author Yann Nicolas
  */
 public class MaxConverter implements JSR303ConstraintConverter {
 

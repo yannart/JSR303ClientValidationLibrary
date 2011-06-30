@@ -7,7 +7,6 @@ import java.util.Set;
  * of a Bean.
  * 
  * @author Yann Nicolas
- * 
  */
 public interface ConstraintDescriptorGenerator {
 
