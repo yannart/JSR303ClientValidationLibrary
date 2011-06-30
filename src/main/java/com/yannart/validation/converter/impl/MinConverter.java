@@ -30,8 +30,8 @@ public class MinConverter implements JSR303ConstraintConverter {
 			final ConstrainedProperty validatedProperty) {
 
 		if (annotation instanceof Min) {
-			if (attributes.containsKey("min")) {
-				validatedProperty.addAttribute("min", attributes.get("min")
+			if (attributes.containsKey("value")) {
+				validatedProperty.addAttribute("min", attributes.get("value")
 						.toString());
 			}
 		}

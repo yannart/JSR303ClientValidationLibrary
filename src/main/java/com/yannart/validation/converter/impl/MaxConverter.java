@@ -30,8 +30,8 @@ public class MaxConverter implements JSR303ConstraintConverter {
 			final ConstrainedProperty validatedProperty) {
 
 		if (annotation instanceof Max) {
-			if (attributes.containsKey("max")) {
-				validatedProperty.addAttribute("max", attributes.get("max")
+			if (attributes.containsKey("value")) {
+				validatedProperty.addAttribute("max", attributes.get("value")
 						.toString());
 			}
 		}
