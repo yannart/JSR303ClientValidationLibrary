@@ -42,6 +42,10 @@ public interface JSR303ConstraintConverter {
 			Map<String, Object> attributes,
 			ConstrainedProperty constrainedProperty);
 
+	/**
+	 * Converter from the annotation <code>Size</code> to the attributes
+	 * "minlength" and "maxlength".
+	 */
 	static class SizeConverter implements JSR303ConstraintConverter {
 
 		public Class<?>[] annotationClassConverted() {
@@ -66,6 +70,9 @@ public interface JSR303ConstraintConverter {
 		}
 	}
 
+	/**
+	 * Converter from the annotation <code>Min</code> to the attribute "min".
+	 */
 	static class MinConverter implements JSR303ConstraintConverter {
 
 		public Class<?>[] annotationClassConverted() {
@@ -85,6 +92,9 @@ public interface JSR303ConstraintConverter {
 		}
 	}
 
+	/**
+	 * Converter from the annotation <code>Max</code> to the attribute "max".
+	 */
 	static class MaxConverter implements JSR303ConstraintConverter {
 
 		public Class<?>[] annotationClassConverted() {
@@ -104,6 +114,9 @@ public interface JSR303ConstraintConverter {
 		}
 	}
 
+	/**
+	 * Converter from the annotation <code>NotNull</code> to the attribute "required".
+	 */
 	static class RequiredConverter implements JSR303ConstraintConverter {
 
 		public Class<?>[] annotationClassConverted() {
