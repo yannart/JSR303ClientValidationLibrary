@@ -60,8 +60,16 @@ public class ConstraintConverterFactory {
 		}
 	}
 
+	/**
+	 * Obtain a set of converters usable to convert the provided annotation.
+	 * 
+	 * @param annotationClass
+	 *            class of the annotation for which supported converters are
+	 *            searched.
+	 * @return set of converters usable to convert the provided annotation.
+	 */
 	public Set<JSR303ConstraintConverter> getConverterMapByAnnotationClass(
-			Class<?> annotationClass) {
+			final Class<?> annotationClass) {
 		return validationConverterByAnnotationMap.get(annotationClass);
 	}
 }

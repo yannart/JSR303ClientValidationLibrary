@@ -1,14 +1,17 @@
-package com.yannart.validation;
+package com.yannart.validation.json;
 
 import java.util.Map;
 import java.util.Set;
+
+import com.yannart.validation.ConstrainedProperty;
+import com.yannart.validation.ConstraintDescriptorGenerator;
 
 /**
  * Generates JSON code from a set of constrained properties.
  * 
  * @author Yann Nicolas
  */
-public class JSONGenerator {
+public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 
 	/**
 	 * Generates the JSON code from a set of constrained properties.
@@ -18,7 +21,7 @@ public class JSONGenerator {
 	 *            JSON.
 	 * @return String that contents the JSON code.
 	 */
-	public String renderJSON(
+	public String render(
 			final Set<ConstrainedProperty> constrainedProperties) {
 
 		// Creates the builder with the starting string
