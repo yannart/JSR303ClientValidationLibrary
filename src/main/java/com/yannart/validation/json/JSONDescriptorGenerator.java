@@ -13,6 +13,27 @@ import com.yannart.validation.ConstraintDescriptorGenerator;
  */
 public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 
+	private static String EMPTY = "";
+	private static String SPACE = " ";
+	private static String NEW_LINE = "\r\n";
+	private static String TAB = "\t";
+
+	/**
+	 * Indicates if the output JSON code must be formated or not.
+	 */
+	boolean format = true;
+
+	/**
+	 * Constructor of the generator that allows to indicate if the output must
+	 * be formated.
+	 * 
+	 * @param format
+	 *            Indicates if the output JSON code must be formated or not.
+	 */
+	public JSONDescriptorGenerator(final boolean format) {
+		this.format = format;
+	}
+
 	/**
 	 * Generates the JSON code from a set of constrained properties.
 	 * 
@@ -21,11 +42,39 @@ public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 	 *            JSON.
 	 * @return String that contents the JSON code.
 	 */
-	public String render(
-			final Set<ConstrainedProperty> constrainedProperties) {
+	public String render(final Set<ConstrainedProperty> constrainedProperties) {
+		return render(constrainedProperties, format);
+	}
+
+	/**
+	 * Generates the JSON code from a set of constrained properties.
+	 * 
+	 * @param constrainedProperties
+	 *            set of constrained properties to include in the generated
+	 *            JSON.
+	 * @param format
+	 *            indicates if the output must be formated.
+	 * @return String that contents the JSON code.
+	 */
+	public String render(final Set<ConstrainedProperty> constrainedProperties,
+			final boolean format) {
+
+		// Define the blank characters that will be used to format the output.
+		// If the output is not formated, empty characters are used.
+		String space = EMPTY;
+		String newLine = EMPTY;
+		String tab = EMPTY;
+		if (format == true) {
+			space = SPACE;
+			newLine = NEW_LINE;
+			tab = TAB;
+		}
 
 		// Creates the builder with the starting string
-		StringBuilder resultJson = new StringBuilder("rules: {\r\n");
+		StringBuilder resultJson = new StringBuilder("rules:");
+		resultJson.append(space);
+		resultJson.append("{");
+		resultJson.append(newLine);
 
 		// Counter to indicate if the property is the first one
 		int propertyNum = 0;
@@ -35,12 +84,16 @@ public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 			Map<String, String> fieldAttributeMap = property.getAttributeMap();
 
 			if (propertyNum > 0) {
-				resultJson.append(",\r\n");
+				resultJson.append(",");
+				resultJson.append(newLine);
 			}
 
-			resultJson.append("\t");
+			resultJson.append(tab);
 			resultJson.append(property.getName());
-			resultJson.append(": {\r\n");
+			resultJson.append(":");
+			resultJson.append(space);
+			resultJson.append("{");
+			resultJson.append(newLine);
 
 			// Counter to indicate if the constraint is the first one
 			int constraintNum = 0;
@@ -50,26 +103,30 @@ public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 				String value = fieldAttributeMap.get(attribute);
 
 				if (constraintNum > 0) {
-					resultJson.append(",\r\n");
+					resultJson.append(",");
+					resultJson.append(newLine);
 				}
 
-				resultJson.append("\t\t");
+				resultJson.append(tab);
+				resultJson.append(tab);
 				resultJson.append(attribute);
-				resultJson.append(": ");
+				resultJson.append(":");
+				resultJson.append(space);
 				resultJson.append(value);
 
 				constraintNum++;
 			}
 
-			resultJson.append("\r\n\t}");
+			resultJson.append(newLine);
+			resultJson.append(tab);
+			resultJson.append("}");
 			propertyNum++;
-
 		}
 
 		// closes the root brackets
-		resultJson.append("\r\n}");
+		resultJson.append(newLine);
+		resultJson.append("}");
 
 		return resultJson.toString();
-
 	}
 }

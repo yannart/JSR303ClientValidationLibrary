@@ -26,7 +26,7 @@ public class JSR303ToJsonTest {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
-		String json = new JSONDescriptorGenerator()
+		String json = new JSONDescriptorGenerator(false)
 				.render(new JSR303ToConstrainedPropertiesImpl()
 						.generateConstrainedProperties(User.class, validator));
 		System.out.println(json);
