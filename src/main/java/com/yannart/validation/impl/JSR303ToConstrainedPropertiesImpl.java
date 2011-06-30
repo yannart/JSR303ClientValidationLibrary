@@ -17,6 +17,7 @@ import com.yannart.validation.ConstrainedProperty;
 import com.yannart.validation.JSR303ToConstrainedProperties;
 import com.yannart.validation.converter.ConstraintConverterFactory;
 import com.yannart.validation.converter.JSR303ConstraintConverter;
+import com.yannart.validation.converter.impl.ConstraintConverterFactoryImpl;
 
 /**
  * Convert a class annotated with JSR303 to a Set of constrained properties.
@@ -28,7 +29,7 @@ public class JSR303ToConstrainedPropertiesImpl implements JSR303ToConstrainedPro
 	/**
 	 * Factory used to obtain the converter instances.
 	 */
-	protected ConstraintConverterFactory converterFactory = new ConstraintConverterFactory();
+	protected ConstraintConverterFactory converterFactory = new ConstraintConverterFactoryImpl();
 
 	/* (non-Javadoc)
 	 * @see com.yannart.validation.impl.JSR303ToConstrainedProperties#generateConstrainedProperties(java.lang.Class, javax.validation.Validator)
