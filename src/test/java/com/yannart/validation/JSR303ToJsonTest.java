@@ -3,13 +3,12 @@
  */
 package com.yannart.validation;
 
-import static org.junit.Assert.*;
-
 import javax.validation.Validation;
 import javax.validation.Validator;
 
 import org.junit.Test;
 
+import com.yannart.validation.converter.impl.ConstraintConverterFactoryImpl;
 import com.yannart.validation.impl.JSR303ToConstrainedPropertiesImpl;
 import com.yannart.validation.json.JSONDescriptorGenerator;
 
@@ -26,8 +25,11 @@ public class JSR303ToJsonTest {
 		Validator validator = Validation.buildDefaultValidatorFactory()
 				.getValidator();
 
+		JSR303ToConstrainedProperties jsr303ToConstrainedProperties = new JSR303ToConstrainedPropertiesImpl();
+		jsr303ToConstrainedProperties.setConverterFactory(new ConstraintConverterFactoryImpl());
+		
 		String json = new JSONDescriptorGenerator(false)
-				.render(new JSR303ToConstrainedPropertiesImpl()
+				.render(jsr303ToConstrainedProperties
 						.generateConstrainedProperties(User.class, validator));
 		System.out.println(json);
 	}

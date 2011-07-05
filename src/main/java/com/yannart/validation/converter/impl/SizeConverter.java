@@ -31,6 +31,7 @@ public class SizeConverter implements JSR303ConstraintConverter {
 			final ConstrainedProperty validatedProperty) {
 
 		if (annotation instanceof Size) {
+			
 			if (attributes.containsKey("min")) {
 				validatedProperty.addAttribute("minlength",
 						attributes.get("min").toString());

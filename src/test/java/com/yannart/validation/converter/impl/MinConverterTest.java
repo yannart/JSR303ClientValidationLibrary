@@ -5,7 +5,7 @@ package com.yannart.validation.converter.impl;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +59,7 @@ public class MinConverterTest {
 		Map<String, Object> attributeMap = new HashMap<String, Object>();
 
 		Min min = mock(Min.class);
-		attributeMap.put("min", 1);
+		when(min.value()).thenReturn(1L);
 
 		minConverter.fillConstrainedPropertyAttributes(min, attributeMap,
 				property);

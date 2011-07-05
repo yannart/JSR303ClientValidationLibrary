@@ -5,7 +5,7 @@ package com.yannart.validation.converter.impl;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +60,7 @@ public class MaxConverterTest {
 		Map<String, Object> attributeMap = new HashMap<String, Object>();
 
 		Max max = mock(Max.class);
+		when(max.value()).thenReturn(10L);
 		attributeMap.put("max", 10);
 
 		maxConverter.fillConstrainedPropertyAttributes(max, attributeMap,
