@@ -90,8 +90,16 @@ public class JSR303ToConstrainedPropertiesImpl implements
 	/**
 	 * {@inheritDoc}
 	 */
-	public void setConverterFactory(
-			ConstraintConverterFactory converterFactory) {
+	public void setConverterFactory(ConstraintConverterFactory converterFactory) {
 		this.converterFactory = converterFactory;
+	}
+
+	/**
+	 * Gets the converter factory.
+	 * 
+	 * @return the converterFactory
+	 */
+	public final ConstraintConverterFactory getConverterFactory() {
+		return converterFactory;
 	}
 }
