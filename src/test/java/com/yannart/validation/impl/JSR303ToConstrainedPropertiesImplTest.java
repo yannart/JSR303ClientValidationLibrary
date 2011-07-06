@@ -3,7 +3,9 @@
  */
 package com.yannart.validation.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import org.junit.Test;
 import com.yannart.validation.ConstrainedProperty;
 import com.yannart.validation.JSR303ToConstrainedProperties;
 import com.yannart.validation.User;
+import com.yannart.validation.converter.ConstraintConverterFactory;
 import com.yannart.validation.converter.impl.ConstraintConverterFactoryImpl;
 
 /**
@@ -92,5 +95,9 @@ public class JSR303ToConstrainedPropertiesImplTest {
 	@Test
 	public void testSetConverterFactory() {
 
+		ConstraintConverterFactory factory = new ConstraintConverterFactoryImpl();
+		JSR303ToConstrainedPropertiesImpl jsr303ToConstrainedProperties = new JSR303ToConstrainedPropertiesImpl();
+		jsr303ToConstrainedProperties.setConverterFactory(factory);
+		assertSame(factory, jsr303ToConstrainedProperties.getConverterFactory());
 	}
 }
