@@ -1,6 +1,6 @@
 package com.yannart.validation;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +22,7 @@ public class ConstrainedProperty {
 	 * Map that constraints the attributes of the property. The key is the
 	 * attribute name, the value is the attribute value.
 	 */
-	private Map<String, String> attributeMap = new HashMap<String, String>();
+	private Map<String, String> attributeMap = new LinkedHashMap <String, String>();
 
 	/**
 	 * Constructor of the Property with an immutable name.
