@@ -29,4 +29,43 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!-- Plugin to add the license. -->
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.9.0</version>
+				<configuration>
+					<basedir>${basedir}</basedir>
+					<header>${basedir}/src/etc/header.txt</header>
+					<quiet>false</quiet>
+					<failIfMissing>true</failIfMissing>
+					<aggregate>false</aggregate>
+					<includes>
+						<include>src/**</include>
+					</includes>
+					<excludes>
+						<exclude>target/**</exclude>
+					</excludes>
+					<useDefaultExcludes>true</useDefaultExcludes>
+					<useDefaultMapping>true</useDefaultMapping>
+					<properties>
+						<year>2011</year>
+						<email>yannart@gmail.com</email>
+						<username>Yann Nicolas</username>
+					</properties>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
