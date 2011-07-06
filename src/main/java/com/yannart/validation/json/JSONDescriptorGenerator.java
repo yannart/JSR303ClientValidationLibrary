@@ -21,7 +21,7 @@ public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 	/**
 	 * Indicates if the output JSON code must be formated or not.
 	 */
-	boolean format = true;
+	private boolean format = true;
 
 	/**
 	 * Constructor of the generator that allows to indicate if the output must
@@ -128,5 +128,14 @@ public class JSONDescriptorGenerator implements ConstraintDescriptorGenerator {
 		resultJson.append("}");
 
 		return resultJson.toString();
+	}
+
+	/**
+	 * Indicates if the output is formatted or not.
+	 * 
+	 * @return true is the output is formatted, false if not.
+	 */
+	public final boolean isFormat() {
+		return format;
 	}
 }
