@@ -18,6 +18,7 @@ package com.yannart.validation.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.fail;
 
 import java.util.Set;
 
@@ -94,6 +95,47 @@ public class JSR303ToConstrainedPropertiesImplTest {
 						constrainedProperty.getAttributeMap().get("max"));
 				assertEquals("true",
 						constrainedProperty.getAttributeMap().get("required"));
+			}
+		}
+
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.yannart.validation.impl.JSR303ToConstrainedPropertiesImpl#generateConstrainedProperties(java.lang.Class, javax.validation.Validator, java.lang.Array)}
+	 * .
+	 */
+	@Test
+	public void testGenerateConstrainedPropertiesWithIgnoredProperties() {
+
+		String[] propertiesToIgnore = new String[] { "age", "lastname" };
+
+		Set<ConstrainedProperty> contraintPropertySet = jsr303ToConstrainedProperties
+				.generateConstrainedProperties(User.class, Validation
+						.buildDefaultValidatorFactory().getValidator(),
+						propertiesToIgnore);
+
+		// 2 properties have constraints
+		assertEquals(2, contraintPropertySet.size());
+		for (ConstrainedProperty constrainedProperty : contraintPropertySet) {
+			if (constrainedProperty.getName().equals("firstname")) {
+				assertEquals("1",
+						constrainedProperty.getAttributeMap().get("minlength"));
+				assertEquals("20",
+						constrainedProperty.getAttributeMap().get("maxlength"));
+				assertEquals("true",
+						constrainedProperty.getAttributeMap().get("required"));
+			} else if (constrainedProperty.getName().equals("middlename")) {
+				assertEquals("1",
+						constrainedProperty.getAttributeMap().get("minlength"));
+				assertEquals("35",
+						constrainedProperty.getAttributeMap().get("maxlength"));
+				assertNull(constrainedProperty.getAttributeMap()
+						.get("required"));
+			} else if (constrainedProperty.getName().equals("lastname")) {
+				fail("The lastname property should be ignored");
+			} else if (constrainedProperty.getName().equals("age")) {
+				fail("The age property should be ignored");
 			}
 		}
 

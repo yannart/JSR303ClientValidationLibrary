@@ -41,14 +41,29 @@ public interface JSR303ToConstrainedProperties {
 	 */
 	public abstract Set<ConstrainedProperty> generateConstrainedProperties(
 			final Class<?> clazz, final Validator validator);
-	
+
+	/**
+	 * Generates a set of constrained properties from a Bean class annotated
+	 * with JRE303 annotations.
+	 * 
+	 * @param clazz
+	 *            Class of the Bean.
+	 * @param validator
+	 *            Validator used to find the Bean constraints.
+	 * @param propertiesToIgnore
+	 *            Properties to ignore from the generation.
+	 * @return A set of constrained properties.
+	 */
+	public abstract Set<ConstrainedProperty> generateConstrainedProperties(
+			final Class<?> clazz, final Validator validator,
+			final String... propertiesToIgnore);
+
 	/**
 	 * Sets the Converter Factory to use when converting the data.
 	 * 
 	 * @param converterFactory
 	 *            the converterFactory to set.
 	 */
-	public void setConverterFactory(
-			ConstraintConverterFactory converterFactory);
+	public void setConverterFactory(final ConstraintConverterFactory converterFactory);
 
 }

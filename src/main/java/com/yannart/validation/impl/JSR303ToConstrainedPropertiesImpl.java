@@ -16,9 +16,11 @@
 package com.yannart.validation.impl;
 
 import java.lang.annotation.Annotation;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.validation.Validator;
 import javax.validation.metadata.BeanDescriptor;
@@ -49,9 +51,21 @@ public class JSR303ToConstrainedPropertiesImpl implements
 	public Set<ConstrainedProperty> generateConstrainedProperties(
 			final Class<?> clazz, final Validator validator) {
 
+		return generateConstrainedProperties(clazz, validator, new String [] {});
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public Set<ConstrainedProperty> generateConstrainedProperties(
+			final Class<?> clazz, final Validator validator,
+			final String... propertiesToIgnore) {
+
+		List<String> propertiesToIgnoreList = Arrays.asList(propertiesToIgnore);
+
 		// Set that will contain the constraint properties of the class to
 		// validate
-		Set<ConstrainedProperty> propertySet = new HashSet<ConstrainedProperty>();
+		Set<ConstrainedProperty> propertySet = new TreeSet<ConstrainedProperty>();
 
 		BeanDescriptor beanDescriptor = validator.getConstraintsForClass(clazz);
 
@@ -64,36 +78,44 @@ public class JSR303ToConstrainedPropertiesImpl implements
 
 			String propertyName = constrainedProperty.getPropertyName();
 
-			ConstrainedProperty property = new ConstrainedProperty(propertyName);
+			// only process the property if it is not in the ignore list
+			if (!propertiesToIgnoreList.contains(propertyName)) {
 
-			Set<ConstraintDescriptor<?>> constraintDescriptors = constrainedProperty
-					.getConstraintDescriptors();
+				ConstrainedProperty property = new ConstrainedProperty(
+						propertyName);
 
-			for (ConstraintDescriptor<?> constraintDescriptor : constraintDescriptors) {
+				Set<ConstraintDescriptor<?>> constraintDescriptors = constrainedProperty
+						.getConstraintDescriptors();
 
-				Annotation annotation = constraintDescriptor.getAnnotation();
-				Map<String, Object> attributes = constraintDescriptor
-						.getAttributes();
+				for (ConstraintDescriptor<?> constraintDescriptor : constraintDescriptors) {
 
-				// Get all the converters capable to trait the annotation
-				Set<JSR303ConstraintConverter> converters = converterFactory
-						.getConverterMapByAnnotationClass(annotation
-								.annotationType());
+					Annotation annotation = constraintDescriptor
+							.getAnnotation();
+					Map<String, Object> attributes = constraintDescriptor
+							.getAttributes();
 
-				// If converters are usable, use it to fill attributes of the
-				// property
-				if (converters != null) {
-					for (JSR303ConstraintConverter converter : converters) {
-						converter.fillConstrainedPropertyAttributes(annotation,
-								attributes, property);
+					// Get all the converters capable to trait the annotation
+					Set<JSR303ConstraintConverter> converters = converterFactory
+							.getConverterMapByAnnotationClass(annotation
+									.annotationType());
+
+					// If converters are usable, use it to fill attributes of
+					// the
+					// property
+					if (converters != null) {
+						for (JSR303ConstraintConverter converter : converters) {
+							converter.fillConstrainedPropertyAttributes(
+									annotation, attributes, property);
+						}
 					}
+				}
+
+				// A property is considered only if it has almost 1 attribute.
+				if (property.getAttributeNumber() > 0) {
+					propertySet.add(property);
 				}
 			}
 
-			// A property is considered only if it has almost 1 attribute.
-			if (property.getAttributeNumber() > 0) {
-				propertySet.add(property);
-			}
 		}
 
 		return propertySet;
