@@ -26,7 +26,7 @@ import java.util.Map;
  * 
  * @author Yann Nicolas
  */
-public class ConstrainedProperty {
+public class ConstrainedProperty implements Comparable<ConstrainedProperty>{
 
 	/**
 	 * Property name.
@@ -86,5 +86,10 @@ public class ConstrainedProperty {
 	 */
 	public Map<String, String> getAttributeMap() {
 		return attributeMap;
+	}
+
+	public int compareTo(final ConstrainedProperty other) {
+		
+		return name.compareTo(other.name);
 	}
 }
