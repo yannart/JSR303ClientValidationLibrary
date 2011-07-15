@@ -16,6 +16,8 @@
 package com.yannart.validation.json;
 
 import com.yannart.validation.AbstractJSR303ToConstraintDescriptor;
+import com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator;
+import com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl;
 
 /**
  * Generates a JSON constraint descriptor following the syntax of the client
@@ -31,6 +33,11 @@ public class JSR303ToJSONConstraintDescriptor extends
 	 * Instance.
 	 */
 	private static JSR303ToJSONConstraintDescriptor instance;
+
+	/**
+	 * Instance with caching capability.
+	 */
+	private static JSR303ToConstraintDescriptorCacheDecorator instanceWithCache;
 
 	/**
 	 * Constructor where the output JSON is formatted.
@@ -61,6 +68,22 @@ public class JSR303ToJSONConstraintDescriptor extends
 			instance = new JSR303ToJSONConstraintDescriptor();
 		}
 		return instance;
+	}
+
+	/**
+	 * Obtain an instance of JSR303ToJSONConstraintDescriptor with the
+	 * capability of caching the requests. If an instance already has been
+	 * created, it reuses it.
+	 * 
+	 * @return an instance of JSR303ToJSONConstraintDescriptor with caching
+	 *         capability
+	 */
+	public static JSR303ToConstraintDescriptorCacheDecorator getCachedInstance() {
+		if (instanceWithCache == null) {
+			instanceWithCache = new JSR303ToConstraintDescriptorCacheDecoratorImpl(
+					getInstance());
+		}
+		return instanceWithCache;
 	}
 
 }

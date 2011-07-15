@@ -24,10 +24,12 @@ import javax.validation.constraints.Size;
 
 import org.junit.Test;
 
+import com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator;
+
 /**
  * Test for the class JSR303ToJSONConstraintDescriptor.
  * 
- * @author Yann Nicolas 
+ * @author Yann Nicolas
  */
 public class JSR303ToJSONConstraintDescriptorTest {
 
@@ -46,6 +48,26 @@ public class JSR303ToJSONConstraintDescriptorTest {
 
 	/**
 	 * Test method for
+	 * {@link com.yannart.validation.json.JSR303ToJSONConstraintDescriptor#getCachedInstance()}
+	 * .
+	 */
+	@Test
+	public final void testGetCachedInstance() {
+
+		// The instance created must be always the same.
+		assertSame(JSR303ToJSONConstraintDescriptor.getCachedInstance(),
+				JSR303ToJSONConstraintDescriptor.getCachedInstance());
+
+		// The wrapped object is the same instance that can be obtained with the
+		// getInstance method
+		assertSame(JSR303ToJSONConstraintDescriptor.getInstance(),
+				JSR303ToJSONConstraintDescriptor.getCachedInstance()
+						.getWrapped());
+
+	}
+
+	/**
+	 * Test method for
 	 * {@link com.yannart.validation.AbstractJSR303ToConstraintDescriptor#render(java.lang.Class)}
 	 * .
 	 */
@@ -56,7 +78,9 @@ public class JSR303ToJSONConstraintDescriptorTest {
 
 		String json = jsr303ToJSONConstraintDescriptor.render(Order.class);
 
-		assertEquals("rules:{alreadyPayed:{min:0,max:99},mealName:{required:true,minlength:4,maxlength:40},price:{min:0,max:99},waiterName:{required:true}}", json);
+		assertEquals(
+				"rules:{alreadyPayed:{min:0,max:99},mealName:{required:true,minlength:4,maxlength:40},price:{min:0,max:99},waiterName:{required:true}}",
+				json);
 	}
 
 	/**
@@ -72,7 +96,9 @@ public class JSR303ToJSONConstraintDescriptorTest {
 		String json = jsr303ToJSONConstraintDescriptor.render(Order.class,
 				new String[] { "waiterName" });
 
-		assertEquals("rules:{alreadyPayed:{min:0,max:99},mealName:{required:true,minlength:4,maxlength:40},price:{min:0,max:99}}", json);
+		assertEquals(
+				"rules:{alreadyPayed:{min:0,max:99},mealName:{required:true,minlength:4,maxlength:40},price:{min:0,max:99}}",
+				json);
 	}
 
 }
