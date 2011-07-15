@@ -37,7 +37,7 @@ import com.yannart.validation.JSR303ToConstraintDescriptor;
 public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 
 	JSR303ToConstraintDescriptor wrapped;
-	JSR303ToConstraintDescriptorCacheDecorator cacheDecorator;
+	JSR303ToConstraintDescriptorCacheDecoratorImpl cacheDecorator;
 
 	/**
 	 * Setups the objects required for the tests.
@@ -48,19 +48,19 @@ public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 	public void setUp() throws Exception {
 
 		wrapped = mock(JSR303ToConstraintDescriptor.class);
-		cacheDecorator = new JSR303ToConstraintDescriptorCacheDecorator(wrapped);
+		cacheDecorator = new JSR303ToConstraintDescriptorCacheDecoratorImpl(wrapped);
 	}
 
 	/**
 	 * Test method for
-	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator#JSR303ToConstraintDescriptorCacheDecorator(com.yannart.validation.JSR303ToConstraintDescriptor)}
+	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl#JSR303ToConstraintDescriptorCacheDecorator(com.yannart.validation.JSR303ToConstraintDescriptor)}
 	 * .
 	 */
 	@Test
 	public final void testJSR303ToConstraintDescriptorCacheDecorator() {
 
 		JSR303ToConstraintDescriptor wrapped = mock(JSR303ToConstraintDescriptor.class);
-		JSR303ToConstraintDescriptorCacheDecorator deco = new JSR303ToConstraintDescriptorCacheDecorator(
+		JSR303ToConstraintDescriptorCacheDecorator deco = new JSR303ToConstraintDescriptorCacheDecoratorImpl(
 				wrapped);
 
 		assertSame(wrapped, deco.getWrapped());
@@ -68,7 +68,7 @@ public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 
 	/**
 	 * Test method for
-	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator#render(java.lang.Class)}
+	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl#render(java.lang.Class)}
 	 * .
 	 */
 	@Test
@@ -97,7 +97,7 @@ public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 
 	/**
 	 * Test method for
-	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator#render(java.lang.Class, java.lang.String[])}
+	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl#render(java.lang.Class, java.lang.String[])}
 	 * .
 	 */
 	@Test
@@ -153,7 +153,7 @@ public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 
 	/**
 	 * Test method for
-	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator#render(java.lang.Class, boolean)}
+	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl#render(java.lang.Class, boolean)}
 	 * .
 	 */
 	@Test
@@ -185,7 +185,7 @@ public class JSR303ToConstraintDescriptorCacheDecoratorTest {
 
 	/**
 	 * Test method for
-	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator#render(java.lang.Class, boolean, java.lang.String[])}
+	 * {@link com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecoratorImpl#render(java.lang.Class, boolean, java.lang.String[])}
 	 * .
 	 */
 	@Test
