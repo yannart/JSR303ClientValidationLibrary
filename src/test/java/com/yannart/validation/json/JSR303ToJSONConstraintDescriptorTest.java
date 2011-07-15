@@ -15,7 +15,8 @@
  */
 package com.yannart.validation.json;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -23,8 +24,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.junit.Test;
-
-import com.yannart.validation.cache.JSR303ToConstraintDescriptorCacheDecorator;
 
 /**
  * Test for the class JSR303ToJSONConstraintDescriptor.
